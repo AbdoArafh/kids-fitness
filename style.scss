@@ -1,0 +1,270 @@
+$dark-blue: #0F296D;
+$medium-blue: #375DBE;
+$body-bg: #e5e5e5;
+$body-margin: 0;
+$sidebar-height: 100vh;
+$sidebar-width: 15vw;
+$border-radius: 1.5rem;
+$color-blue: #0F296D;
+$color-gray: rgba(0, 0, 0, 40%);
+$light-gray: #f9f9f9;
+$border-gray: #cccccc;
+$color-dark-gray: #393D54;
+$drop-shadow: rgba(0, 0, 0, 6%);
+$gap: 1rem;
+$orange: #F1554C;
+
+@mixin flex-row() {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin shadow() {
+    filter: drop-shadow(0 0 4px $drop-shadow);
+}
+
+@mixin center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+::placeholder {
+    color: $color-gray;
+}
+
+body {
+    background-color: $body-bg;
+    margin: $body-margin;
+    height: 100vh;
+    font-family: Poppins, Roboto, Arial;
+    display: grid;
+    grid-template-columns: 15fr 85fr;
+    grid-template-areas: "sidebar body";
+    gap: $gap;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    height: $sidebar-height;
+    background-color: $dark-blue;
+    display: flex;
+    flex-direction: column;
+    padding: $gap 0 0 $gap;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    .logo {
+        margin: $gap $gap $gap * 2 0;
+    }
+    .item {
+        display: flex;
+        flex-direction: row;
+        padding: 2rem 0;
+        .icon {
+            margin: 0 0.3rem;
+        }
+        .text {
+            color: white;
+            font-size: 1.1rem;
+            align-self: flex-end;
+        }
+    }
+    .selected {
+        background-color: $body-bg;
+        position: relative;
+        border-radius: $border-radius;
+        .text {
+            color: black;
+        }
+        &::before, &::after {
+            content: "";
+            position: absolute;
+            background-color: transparent;
+            display: block;
+            width: 50px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 30px solid $body-bg;
+            border-color:
+                transparent
+                transparent
+                $body-bg
+                transparent;
+            right: 0;
+        }
+        &::before {
+            top: 0;
+            transform: 
+                rotate(-40deg)
+                translate(68%, -38%);
+        }
+        &::after {
+            bottom: 0;
+            transform:
+                rotate(220deg)
+                translate(-68%, -38%);
+        }
+    }
+}
+
+.body {
+    grid-area: body;
+    height: $sidebar-height;
+    padding: 0 $gap;
+    display: grid;
+    grid-template-rows: 1fr 2fr 4fr;
+    gap: $gap;
+    .card {
+        @include shadow();
+        border-radius: $border-radius;
+        background-color: white;
+    }
+    .header {
+        @include shadow();
+        background: white;
+        border-radius: 0 0 $border-radius $border-radius;
+        padding: 1rem;
+        align-items: center;
+        @include flex-row();
+        .logo {
+            flex: 2 1 auto;
+            font-size: 1.5rem;
+        }
+        .content {
+            @include flex-row();
+            .profile-pic {
+                @include flex-row();
+            }
+            .search {
+                @include flex-row();
+                padding: 0.3rem;
+                border: 1px solid $border-gray;
+                border-radius: $border-radius / 4;
+                .search-icon {  
+                    margin-right: 1rem;
+                }
+                .search-input {
+                    border: none;
+                    outline: none;
+                }
+            }
+            .notifications-icon {
+                margin: 0 1rem;
+                cursor: pointer;
+                &:hover {
+                    filter: brightness(0.9);
+                }
+                &:active {
+                    filter: brightness(1.1);
+                }
+            }
+            .profile-pic {
+                @include flex-row();
+                cursor: pointer;
+                .pic {
+                    border-radius: $border-radius / 4;
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+    }
+    .estimates {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: $gap;
+        .card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            .data {
+                display: flex;
+                flex-direction: column;
+                border: 1px solid transparent;
+                border-left-color: $color-gray;
+                padding: 1rem;
+                align-items: center;
+                .value {
+                    font-weight: bold;
+                    font-size: 2rem;
+                }
+                .key {
+                    font-size: 0.75rem;
+                    color: $color-gray;
+                }
+            }
+        }
+    }
+    .statistics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: $gap;
+        img {
+            height: 100%;
+        }
+    }
+}
+
+// .status {
+//     padding: 1rem;
+//     display: grid;
+//     grid-template-columns: 1fr;
+//     grid-template-rows: 0.5fr 2fr 2fr;
+//     gap: $gap;
+//     max-height: 280px;
+//     .big {
+//         color: $color-blue;
+//     }
+//     .title {
+//         font-weight: bold;
+//     }
+//     .data {
+//         display: grid;
+//         grid-template-columns: repeat(3, 1fr);
+//         gap: $gap;
+//         .small-card {
+//             background-color: $light-gray;
+//             border-radius: $border-radius;
+//             padding: 1rem;
+//             text-align: center;
+//             .big {
+//                 font-size: 2rem;
+//                 font-weight: bold;
+//             }
+//             .small {
+//                 font-size: 0.75rem;
+//             }
+//         }
+//     }
+//     .wod {
+//         display: grid;
+//         grid-template-columns: 0.1fr 1fr 1fr; 
+//         gap: $gap;
+//         border-radius: $border-radius;
+//         background-color: $light-gray;
+//         .orange {
+//             background-color: $orange;
+//             border-radius: 
+//             $border-radius
+//             0
+//             0
+//             $border-radius;
+//         }
+//         .title {
+//             font-weight: normal;
+//             font-size: 1rem;
+//             @include center();
+//         }
+//         .icon {
+//             @include center();
+//             flex-direction: column;
+//             .big {
+//                 font-weight: bold;
+//                 font-size: 1.25rem;
+//             }
+//             .small {
+//                 font-size: 0.75rem;
+//             }
+//         }
+//     }
+// }
