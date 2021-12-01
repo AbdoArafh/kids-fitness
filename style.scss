@@ -197,10 +197,32 @@ body {
     .statistics {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
         gap: $gap;
         img {
             height: 100%;
+        }
+    }
+}
+
+@media (max-width: 1300px) {
+    .body {
+        .header {
+            .logo {
+                display: none;
+            }
+            .search {
+                flex: 2 1 auto;
+            }
+        }
+        .estimates {
+            grid-template-columns: 1fr;
+        }
+        .statistics {
+            grid-template-columns: 1fr;
+            justify-items: center;
+            img {
+                max-width: 60vw;
+            }
         }
     }
 }
