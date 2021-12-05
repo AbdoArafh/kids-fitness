@@ -170,7 +170,30 @@ body {
   height: 100%;
 }
 
+@media (min-width: 1300px) {
+  .body .statistics {
+    margin-inline: auto;
+  }
+}
 @media (max-width: 1300px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas: "body";
+  }
+
+  .sidebar {
+    height: auto;
+    display: none;
+  }
+
+  .body {
+    grid-template-rows: auto;
+    height: auto;
+  }
+  .body .header {
+    max-height: 50px;
+    justify-content: center;
+  }
   .body .header .logo {
     display: none;
   }
@@ -179,13 +202,22 @@ body {
   }
   .body .estimates {
     grid-template-columns: 1fr;
+    justify-items: center;
+    width: 100%;
+  }
+  .body .estimates .card {
+    max-height: 125px;
+    width: 100%;
+    max-width: 600px;
   }
   .body .statistics {
     grid-template-columns: 1fr;
     justify-items: center;
+    width: 100%;
   }
   .body .statistics img {
-    max-width: 60vw;
+    width: 100%;
+    max-width: 600px;
   }
 }
 

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $dark-blue: #0F296D;
 $medium-blue: #375DBE;
 $body-bg: #e5e5e5;
@@ -139,7 +141,7 @@ body {
                 @include flex-row();
                 padding: 0.3rem;
                 border: 1px solid $border-gray;
-                border-radius: $border-radius / 4;
+                border-radius: math.div($border-radius, 4);
                 .search-icon {  
                     margin-right: 1rem;
                 }
@@ -162,7 +164,7 @@ body {
                 @include flex-row();
                 cursor: pointer;
                 .pic {
-                    border-radius: $border-radius / 4;
+                    border-radius: math.div($border-radius, 4);
                     margin-right: 0.5rem;
                 }
             }
@@ -204,9 +206,29 @@ body {
     }
 }
 
-@media (max-width: 1300px) {
+@media (min-width: 1300px) {
     .body {
+        .statistics {
+            margin-inline: auto;    
+        }
+    }
+}
+
+@media (max-width: 1300px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas: "body";
+    }
+    .sidebar {
+        height: auto;
+        display: none;
+    }
+    .body {
+        grid-template-rows: auto;
+        height: auto;
         .header {
+            max-height: 50px;
+            justify-content: center;
             .logo {
                 display: none;
             }
@@ -216,12 +238,21 @@ body {
         }
         .estimates {
             grid-template-columns: 1fr;
+            justify-items: center;
+            width: 100%;
+            .card {
+                max-height: 125px;
+                width: 100%;
+                max-width: 600px;
+            }
         }
         .statistics {
             grid-template-columns: 1fr;
             justify-items: center;
+            width: 100%;
             img {
-                max-width: 60vw;
+                width: 100%;
+                max-width: 600px;
             }
         }
     }
